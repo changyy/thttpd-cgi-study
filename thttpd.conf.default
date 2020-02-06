@@ -1,0 +1,6 @@
+dir=/Volumes/Data/Self/thttpd-study/workspace/html
+user=root
+logfile=/Volumes/Data/Self/thttpd-study/workspace/log/thttpd.log
+pidfile=/Volumes/Data/Self/thttpd-study/workspace/run/thttpd.pid
+port=8000
+cgipat=/cgi-bin/* 
