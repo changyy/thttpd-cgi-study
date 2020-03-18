@@ -38,9 +38,22 @@ else(CURL_FOUND)
 	message(FATAL_ERROR "libcurl not found")
 endif(CURL_FOUND)
 
-include_directories(deps/cgic-1.05/include)
+# https://raw.githubusercontent.com/boutell/cgic/master/cgic.h
+# https://raw.githubusercontent.com/boutell/cgic/master/cgic.c
+#set(CGIC_VERSION "cgic-1.05")
+set(CGIC_VERSION "cgic-2.07")
+
+include_directories(deps/${CGIC_VERSION}/include)
 add_library(cgic
-	deps/cgic-1.05/src/cgic.c
+	deps/${CGIC_VERSION}/src/cgic.c
+)
+
+# https://raw.githubusercontent.com/DaveGamble/cJSON/v1.7.12/cJSON.h
+# https://raw.githubusercontent.com/DaveGamble/cJSON/v1.7.12/cJSON.c
+set(CJSON_VERSION "cjson-1.7.12")
+include_directories(deps/${CJSON_VERSION}/include)
+add_library(cjson
+	deps/${CJSON_VERSION}/src/cJSON.c
 )
 
 add_executable(study-curl.cgi
@@ -49,4 +62,12 @@ add_executable(study-curl.cgi
 target_link_libraries(study-curl.cgi
 	cgic
 	curl
+)
+
+add_executable(study-cjson.cgi
+	src/study-cjson.c
+)
+target_link_libraries(study-cjson.cgi
+	cgic
+	cjson
 )
