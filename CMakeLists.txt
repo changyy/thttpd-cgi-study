@@ -71,3 +71,12 @@ target_link_libraries(study-cjson.cgi
 	cgic
 	cjson
 )
+
+add_executable(study-app.cgi
+	src/study-app.c
+)
+target_link_libraries(study-app.cgi
+	cgic
+	cjson
+	curl
+)
