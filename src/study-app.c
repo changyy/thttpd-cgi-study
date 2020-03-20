@@ -5,6 +5,7 @@
 #include "cgic.h"
 #include "cJSON.h"
 #include "my_curl_helper.h"
+#include "my_cgic_helper.h"
 
 int cgiMain(int argc, char *argv[]) {
 	char *data;
@@ -12,21 +13,18 @@ int cgiMain(int argc, char *argv[]) {
 	char **query_string_key_value_pair = NULL;
 	size_t query_string_key_value_count, i;
 
-	// https://raw.githubusercontent.com/boutell/cgic/master/cgic.h
-	cgiHeaderContentType("application/json; charset=utf-8");
-
 	if (NULL == (output = cJSON_CreateObject())) {
-		fprintf(cgiOut, "{\"status\":false,\"error\":\"cJSON_CreateObject\"}");
+		my_cgic_api_output("{\"status\":false,\"error\":\"cJSON_CreateObject\"}", NULL);
 		return 0;
 	}
 	// https://github.com/DaveGamble/cJSON/blob/master/cJSON.h
 	if (NULL == (cJSON_AddTrueToObject(output, "status"))) {
-		fprintf(cgiOut, "{\"status\":false,\"error\":\"cJSON_AddTrueToObject\"}");
+		my_cgic_api_output("{\"status\":false,\"error\":\"cJSON_AddTrueToObject\"}", NULL);
 		cJSON_free(output);
 		return 0;
 	} 
 	if (NULL == (object = cJSON_AddArrayToObject(output, "params"))) {
-		fprintf(cgiOut, "{\"status\":false,\"error\":\"cJSON_AddArrayToObject\"}");
+		my_cgic_api_output("{\"status\":false,\"error\":\"cJSON_AddArrayToObject\"}", NULL);
 		cJSON_free(output);
 		return 0;
 	}
@@ -46,7 +44,7 @@ int cgiMain(int argc, char *argv[]) {
 
 	//data = cJSON_Print(output);
 	data = cJSON_PrintUnformatted(output);
-	fprintf(cgiOut, "%s", data);
+	my_cgic_api_output(data, NULL);
 	free(data);
 
 	cJSON_free(output);
