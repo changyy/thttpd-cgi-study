@@ -28,7 +28,7 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make
-$ cp study-curl.cgi ../workspace/html/cgi-bin
+$ cp study-*.cgi ../workspace/html/cgi-bin
 ```
 
 ---

@@ -4,16 +4,17 @@
 #include <curl/curl.h>
 #include "cgic.h"
 #include "my_curl_helper.h"
+#include "my_cgic_helper.h"
 
 int cgiMain(int argc, char *argv[]) {
 	int ret;
 	char tmp;
 	struct my_curl_output_result result;
-	//cgiHeaderContentType("application/json; charset=utf-8");
+
 	cgiHeaderContentType("text/html; charset=utf-8");
 	fprintf(cgiOut, "<html><body><pre>\n");
 	fprintf(cgiOut, "== Server Info - Begin ==\n");
-	showServerEnvInfo();
+	my_cgic_show_http_env();
 	fprintf(cgiOut, "-- Server Info - End --\n");
 
 	fprintf(cgiOut, "\n\nUsing libcurl fire a request: https://dns.google/resolve?name=google.com\n\n");

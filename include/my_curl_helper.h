@@ -133,41 +133,6 @@ size_t get_file_contents(char *url, struct my_curl_output_result *result) {
 	return ret;
 }
 
-void showServerEnvInfo() {
-	char HTTP_EVNS[][64] = {
-		"PATH",
-		"LD_LIBRARY_PATH",
-		"SERVER_SOFTWARE",
-		"SERVER_NAME",
-		"GATEWAY_INTERFACE",
-		"SERVER_PROTOCOL",
-		"SERVER_PORT",
-		"REQUEST_METHOD",
-		"PATH_INFO",
-		"PATH_TRANSLATED",
-		"SCRIPT_NAME",
-		"QUERY_STRING",
-		"REMOTE_ADDR",
-		"HTTP_REFERER",
-		"HTTP_USER_AGENT",
-		"HTTP_ACCEPT",
-		"HTTP_ACCEPT_ENCODING",
-		"HTTP_ACCEPT_LANGUAGE",
-		"HTTP_COOKIE",
-		"CONTENT_TYPE",
-		"HTTP_HOST",
-		"CONTENT_LENGTH",
-		"REMOTE_USER",
-		"AUTH_TYPE",
-		"TZ",
-		"CGI_PATTERN",
-	};
-	int i, total;
-	total = sizeof(HTTP_EVNS)/sizeof(HTTP_EVNS[0]);
-	for(i = 0; i < total; ++i )
-        	printf("%s=%s\n", HTTP_EVNS[i], getenv(HTTP_EVNS[i]));
-}
-
 void my_curl_reset_query_string(char ***key_value, size_t *key_value_number) {
 	size_t i, cnt;
 	if (key_value == NULL || (*key_value == NULL)) {
